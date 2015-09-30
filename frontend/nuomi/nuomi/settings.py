@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'nuomi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'nuomidb',
+        'NAME': 'nuomidb2',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': '192.168.1.132',
