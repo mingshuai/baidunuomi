@@ -16,6 +16,8 @@ NEWSPIDER_MODULE = 'baidunuomi.spiders'
 
 
 LOG_LEVEL = 'ERROR'
+path = "C:\Users\Localhost\PycharmProjects\baidunuomi\frontend"
+
 
 
 DOWNLOADER_MIDDLEWARES = {
