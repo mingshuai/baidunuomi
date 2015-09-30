@@ -22,3 +22,4 @@ class ProductDetail(models.Model):
 class ProductImages(models.Model):
     product = models.ForeignKey(ProductDetail, related_name='product_image_id')
     product_real_image_url = models.CharField(max_length=255, verbose_name=u"产品图片地址")
+
