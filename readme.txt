@@ -13,7 +13,7 @@ frontend 目录：
 Testing：
     step 1. 在frontend目录中,先使用django创建数据表.
             cd frontend/nuomi
-            python  manager.py  syncdb
+            python manage.py  syncdb
             python manage.py  migrate
     step 2. 在spider目录中,使用爬虫程序.
             cd spider
