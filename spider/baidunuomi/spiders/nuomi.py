@@ -3,6 +3,7 @@ import scrapy
 from scrapy.selector import Selector
 from scrapy.http import Request
 from baidunuomi.items import BaidunuomiItem
+from baidunuomi.utils import Django_ORM
 
 
 
@@ -62,37 +63,26 @@ class ExampleSpider(scrapy.Spider):
         product_price = sel.xpath('//div[@class="match-price-area"]/span[@class="real-price"]/text()').extract()
         #### product_address = sel.xpath('//li[@class="branch branch-open"]/p[@class="branch-address"]/text()').extract() # js解析
         product_images = sel.xpath('//p[@class="wrap-img"]/img/@src').extract()
-
-        # print u"产品地区:" + product_zone
-        # print u"产品分类:" + product_category[0]
-        # print u"产品名称:" + product_name[0]
-        # print u"产品说明:" + product_detail[0]
-        # if len(product_star) != 0:
-        #     print u"产品星级:" + product_star[0]
-        # else:
-        #     print  u"产品星级:" + str(product_star)
-        # print u"产品价格:" + product_price[0]
-        # print u"产品图片地址:"
-        # for i in product_images:
-        #     print i
-        # print "================================="
-
-        items = []
-        item = BaidunuomiItem()
-        item["zone"] = [product_zone]
-        item["category"] = product_category
-        item["product"] = product_name
-        item["product_price"] = product_price
-        item["product_detail"] = product_detail
-        item["product_real_url"] = [response.url]
-        item["product_real_image_url"] = [product_images[0]]
-        if len(product_star) != 0:
-            item["product_star"] = product_star
+        crawed = Django_ORM.iscrawled()
+        if crawed.IsCrawled(response.url):
+            items = []
+            item = BaidunuomiItem()
+            item["zone"] = [product_zone]
+            item["category"] = product_category
+            item["product"] = product_name
+            item["price"] = product_price
+            item["detail"] = product_detail
+            item["real_url"] = [response.url]
+            item["real_image_url"] = [product_images[0]]
+            if len(product_star) != 0:
+                item["star"] = product_star
+            else:
+                item["star"] = [str(product_star)]
+            items.append(item)
+            return items
         else:
-            item["product_star"] = [str(product_star)]
-        items.append(item)
-        return items
-
+            print response.url + " was crawled! "
+            pass
 
 
 
