@@ -28,6 +28,14 @@ DOWNLOADER_MIDDLEWARES = {
 #    'baidunuomi.utils.User_Proxy.ProxyMiddleware': 100,
 }
 
+DEFAULT_ITEM_CLASS = {'baidunuomi.items.BaidunuomiItem': 300}
+
+IMAGES_MIN_HEIGHT = 50
+IMAGES_MIN_WIDTH = 50
+IMAGES_STORE = 'images'
+DOWNLOAD_TIMEOUT = 1200
+ITEM_PIPELINES ={'baidunuomi.pipelines.BaidunuomiPipeline': 300 }
+
 
 
 
